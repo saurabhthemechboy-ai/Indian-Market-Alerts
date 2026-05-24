@@ -24,21 +24,30 @@ function ConvertTo-TelegramMessage {
     param([object]$Alert)
 
     $lines = New-Object System.Collections.Generic.List[string]
-    $lines.Add("Indian Market Alert")
-    $lines.Add("$($Alert.Impact) | $($Alert.Direction) | Score $($Alert.Score)")
-    $lines.Add("Affected: $($Alert.Affected)")
+    $lines.Add("<b>Indian Market Alert</b>")
+    $lines.Add("Format: NO_LINK_V2")
+    $lines.Add("$(ConvertTo-HtmlText $Alert.Impact) | $(ConvertTo-HtmlText $Alert.Direction) | Score $(ConvertTo-HtmlText $Alert.Score)")
+    $lines.Add("Affected: $(ConvertTo-HtmlText $Alert.Affected)")
     $lines.Add("")
-    $lines.Add("$($Alert.News)")
+    $lines.Add("$(ConvertTo-HtmlText $Alert.News)")
     if ($Alert.Reason) {
         $lines.Add("")
-        $lines.Add("Reason: $($Alert.Reason)")
-    }
-    if ($Alert.Link) {
-        $lines.Add("")
-        $lines.Add("Link: $($Alert.Link)")
+        $lines.Add("Reason: $(ConvertTo-HtmlText $Alert.Reason)")
     }
 
     return ($lines -join "`n").Trim()
+}
+
+function ConvertTo-HtmlText {
+    param([object]$Value)
+
+    return [System.Net.WebUtility]::HtmlEncode([string]$Value)
+}
+
+function ConvertTo-HtmlAttribute {
+    param([object]$Value)
+
+    return ([System.Net.WebUtility]::HtmlEncode([string]$Value)).Replace("'", "&#39;")
 }
 
 function Send-TelegramMessage {
@@ -52,6 +61,7 @@ function Send-TelegramMessage {
     $body = @{
         chat_id = $ChatId
         text = $Message
+        parse_mode = "HTML"
         disable_web_page_preview = $true
     }
 
@@ -132,6 +142,8 @@ if ($ResetState -and (Test-Path -LiteralPath $statePath)) {
 
 $report = Get-Content -LiteralPath $alertsPath -Raw | ConvertFrom-Json
 $sentState = Read-SentState -Path $statePath
+
+Write-Output "Telegram format version: NO_LINK_V2"
 
 $alerts = @($report.Alerts) |
     Where-Object { [int]$_.Score -ge $MinScore } |
