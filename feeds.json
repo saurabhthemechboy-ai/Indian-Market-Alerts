@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Indian market headlines",
+    "url": "https://news.google.com/rss/search?q=Indian%20stock%20market%20Nifty%20Sensex%20when%3A1d&hl=en-IN&gl=IN&ceid=IN%3Aen"
+  },
+  {
+    "name": "RBI inflation rupee rates",
+    "url": "https://news.google.com/rss/search?q=India%20RBI%20inflation%20rupee%20repo%20rate%20when%3A1d&hl=en-IN&gl=IN&ceid=IN%3Aen"
+  },
+  {
+    "name": "FII DII flows",
+    "url": "https://news.google.com/rss/search?q=India%20FII%20DII%20flows%20Nifty%20when%3A1d&hl=en-IN&gl=IN&ceid=IN%3Aen"
+  },
+  {
+    "name": "Crude oil rupee India stocks",
+    "url": "https://news.google.com/rss/search?q=crude%20oil%20rupee%20India%20stocks%20when%3A1d&hl=en-IN&gl=IN&ceid=IN%3Aen"
+  },
+  {
+    "name": "Bank Nifty financials",
+    "url": "https://news.google.com/rss/search?q=Bank%20Nifty%20banks%20NBFC%20India%20when%3A1d&hl=en-IN&gl=IN&ceid=IN%3Aen"
+  },
+  {
+    "name": "Nifty IT global cues",
+    "url": "https://news.google.com/rss/search?q=Nifty%20IT%20Nasdaq%20US%20Fed%20India%20when%3A1d&hl=en-IN&gl=IN&ceid=IN%3Aen"
+  }
+]
