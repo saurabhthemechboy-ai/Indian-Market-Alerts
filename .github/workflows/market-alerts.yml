@@ -1,0 +1,26 @@
+name: Indian Market Alerts
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 3 * * 1-5"
+    - cron: "45 3-9 * * 1-5"
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  send-alerts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fetch news and send Telegram alerts
+        shell: pwsh
+        run: ./FetchMarketNews.ps1 -SendTelegram -TelegramMinScore 6 -TelegramMaxAlerts 5
