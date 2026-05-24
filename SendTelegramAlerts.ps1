@@ -71,10 +71,6 @@ function Send-TelegramMessage {
 function Get-AlertKey {
     param([object]$Alert)
 
-    if ($Alert.Link) {
-        return "link:$($Alert.Link)"
-    }
-
     $normalized = ([string]$Alert.News).Trim().ToLowerInvariant() -replace "\s+", " "
     return "news:$normalized"
 }
