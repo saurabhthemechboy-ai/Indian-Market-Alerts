@@ -31,4 +31,4 @@ jobs:
 
       - name: Fetch news and send Telegram alerts
         shell: pwsh
-        run: ./FetchMarketNews.ps1 -SendTelegram -TelegramMinScore 6 -TelegramMaxAlerts 5
+        run: ./FetchMarketNews.ps1 -SendTelegram -TelegramMinScore 8 -TelegramMaxAlerts 3
