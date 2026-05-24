@@ -21,6 +21,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Verify Telegram sender version
+        shell: pwsh
+        run: |
+          Select-String -Path ./SendTelegramAlerts.ps1 -Pattern "NO_LINK_V2"
+          if (Select-String -Path ./SendTelegramAlerts.ps1 -Pattern "reply_markup|Open article|Link:") {
+            throw "Old link-sending code is still present in SendTelegramAlerts.ps1"
+          }
+
       - name: Fetch news and send Telegram alerts
         shell: pwsh
         run: ./FetchMarketNews.ps1 -SendTelegram -TelegramMinScore 6 -TelegramMaxAlerts 5
